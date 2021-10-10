@@ -92,7 +92,7 @@ client.connect((err) => {
 			})
 	})
 
-  app.get('/allProperty',(req, res) => {
+  app.get("/allProperty",(req, res) => {
 		PropertyDB.find({}).toArray((err, documents) => {
 			res.send(documents);
 		});
