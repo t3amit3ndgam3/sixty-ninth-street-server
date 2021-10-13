@@ -12,8 +12,7 @@ const client = new MongoClient(uri, {
 	useUnifiedTopology: true,
 });
 
-
-// update your .env 
+// update your .env
 // DbUser = TeamIt
 // DbPass = TeamItPass0102
 // DbName = SixtyNinethStreet
@@ -26,6 +25,12 @@ app.use(fileUpload());
 
 client.connect((err) => {
 	const PropertyDB = client.db("SixtyNinethStreet").collection("Property");
+	const UserReviewsDB = client
+		.db("SixtyNinethStreet")
+		.collection("UserReviews");
+	const AgentDB = client
+		.db("SixtyNinethStreet")
+		.collection("Agents");
 
 	app.post("/addProperties", (req, res) => {
 		let number = Math.random() * 10000000000;
@@ -51,7 +56,7 @@ client.connect((err) => {
 		const image_two = req.files.image_two;
 		const image_three = req.files.image_three;
 
-		const key = `${owner_gmail}_${floorNumber}`;
+		const key = `${property_name}_${floorNumber}`;
 		const imgOne = `${property_name}_${image_one.name}`;
 		const imgTwo = `${property_name}_${image_two.name}`;
 		const imgThree = `${property_name}_${image_three.name}`;
@@ -85,24 +90,92 @@ client.connect((err) => {
 			imgThree,
 		})
 			.then((result) => {
-				res.send(result.insertedCount > 0)
+				res.send(result.insertedCount > 0);
 			})
 			.then((err) => {
-				console.log(err)
-			})
-	})
+				console.log(err);
+			});
+	});
 
-  app.get("/allProperty",(req, res) => {
+	app.get("/allProperty", (req, res) => {
 		PropertyDB.find({}).toArray((err, documents) => {
 			res.send(documents);
 		});
-	})
+	});
+
+	app.post("/addUserReview", (req, res) => {
+		const review = req.body;
+
+		UserReviewsDB.insertOne(review)
+			.then((result) => {
+				console.log(result);
+			})
+			.then((err) => {
+				console.log(err);
+			});
+	});
+
+	app.get("/getReviews", (req, res) => {
+		UserReviewsDB.find({}).toArray((err, documents) => {
+			res.send(documents);
+		});
+	});
+
+	app.post("/addAgent", (req, res) => {
+		let number = Math.random() * 10000000000;
+		let floorNumber = Math.floor(number);
+
+		const agent_name = req.body.agent_name;
+		const agent_title = req.body.agent_title;
+		const agent_number = req.body.agent_number;
+		const agent_email = req.body.agent_email;
+		const agent_facebook = req.body.agent_facebook;
+		const agent_linkend = req.body.agent_linkend;
+		const agent_twitter = req.body.agent_twitter;
+		const agent_instagram = req.body.agent_instagram;
+		const agent_skype = req.body.agent_skype;
+		const agent_image = req.files.agent_image;
+
+		const key = `${agent_number}_${floorNumber}`;
+		const agent_img = `${agent_name}_${agent_image.name}`;
+
+		const create_date = new Date();
+
+		agent_image.mv(`${__dirname}/agents/${agent_name}_${agent_image.name}`);
+
+		AgentDB.insertOne({
+			key,
+			agent_name,
+			agent_title,
+			agent_number,
+			agent_email,
+			agent_facebook,
+			agent_linkend,
+			agent_twitter,
+			agent_instagram,
+			agent_skype,
+			agent_img,
+			create_date
+		})
+		.then( result =>{
+			console.log(result);
+		})
+		.then((err)=>{
+			console.log(err)
+		})
+	});
+
+	app.get("/getAgent", (req, res) => {
+		AgentDB.find({}).toArray((err, documents) => {
+			res.send(documents);
+		});
+	});
 
 	console.log("Database Connected bro");
 });
 
 app.get("/", (req, res) => {
-	res.send("hello world i change this ");
+	res.send("hello world");
 });
 
 app.listen(process.env.PORT || port);
