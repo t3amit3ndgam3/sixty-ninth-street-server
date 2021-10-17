@@ -60,12 +60,14 @@ client.connect((err) => {
 		const imgOne = `${property_name}_${image_one.name}`;
 		const imgTwo = `${property_name}_${image_two.name}`;
 		const imgThree = `${property_name}_${image_three.name}`;
+		const create_date = new Date();
 
 		image_one.mv(`${__dirname}/properties/${property_name}_${image_one.name}`);
 		image_two.mv(`${__dirname}/properties/${property_name}_${image_two.name}`);
 		image_three.mv(
 			`${__dirname}/properties/${property_name}_${image_three.name}`
 		);
+
 
 		PropertyDB.insertOne({
 			key,
@@ -88,6 +90,7 @@ client.connect((err) => {
 			imgOne,
 			imgTwo,
 			imgThree,
+			create_date
 		})
 			.then((result) => {
 				res.send(result.insertedCount > 0);
