@@ -21,6 +21,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("properties"));
+app.use(express.static("agents"));
 app.use(fileUpload());
 
 client.connect((err) => {
@@ -62,10 +63,10 @@ client.connect((err) => {
 		const imgThree = `${property_name}_${image_three.name}`;
 		const create_date = new Date();
 
-		image_one.mv(`${__dirname}/properties/${property_name}_${image_one.name}`);
-		image_two.mv(`${__dirname}/properties/${property_name}_${image_two.name}`);
+		image_one.mv(`${__dirname}/properties/${city}_${image_one.name}`);
+		image_two.mv(`${__dirname}/properties/${city}_${image_two.name}`);
 		image_three.mv(
-			`${__dirname}/properties/${property_name}_${image_three.name}`
+			`${__dirname}/properties/${city}_${image_three.name}`
 		);
 
 
@@ -144,7 +145,7 @@ client.connect((err) => {
 
 		const create_date = new Date();
 
-		agent_image.mv(`${__dirname}/agents/${agent_name}_${agent_image.name}`);
+		agent_image.mv(`${__dirname}/agents/${agent_skype}_${agent_image.name}`);
 
 		AgentDB.insertOne({
 			key,
@@ -173,6 +174,26 @@ client.connect((err) => {
 			res.send(documents);
 		});
 	});
+
+	app.get('/search/:name',(req, res) => {
+		const collect = req.params.name;
+		const regex = new RegExp(collect,'i');
+		PropertyDB.find( { name: regex } ).toArray((err, documents) => {
+			res.send(documents);
+		})
+	})
+
+	app.get('/findProperties/:id',(req, res) => {
+		PropertyDB.find({id: req.params.id}).toArray((err, documents) => {
+			res.send(documents);
+		})
+	})
+
+	app.get('/findAgent/:id',(req, res) => {
+		AgentDB.find({id: req.params.id}).toArray((err, documents) => {
+			res.send(documents);
+		})
+	})
 
 	console.log("Database Connected bro");
 });
