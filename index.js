@@ -168,7 +168,7 @@ client.connect((err) => {
 			create_date
 		})
 		.then( result =>{
-			console.log(result);
+			res.send(result.insertedCount > 0);
 		})
 		.then((err)=>{
 			console.log(err)
