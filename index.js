@@ -21,6 +21,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("properties"));
+app.use(express.static("agents"));
 app.use(fileUpload());
 
 client.connect((err) => {
@@ -56,16 +57,21 @@ client.connect((err) => {
 		const image_two = req.files.image_two;
 		const image_three = req.files.image_three;
 
+
+		const setName1  = image_one.name.replace(/\s/g, "");
+		const setName2  = image_two.name.replace(/\s/g, "");
+		const setName3  = image_three.name.replace(/\s/g, "");
+
 		const key = `${property_for}_${floorNumber}`;
-		const imgOne = `${property_for}_${image_one.name}`;
-		const imgTwo = `${property_for}_${image_two.name}`;
-		const imgThree = `${property_for}_${image_three.name}`;
+		const imgOne = setName1;
+		const imgTwo = setName2;
+		const imgThree = setName3;
 		const create_date = new Date();
 
-		image_one.mv(`${__dirname}/properties/${property_for}_${image_one.name}`);
-		image_two.mv(`${__dirname}/properties/${property_for}_${image_two.name}`);
+		image_one.mv(`${__dirname}/properties/${setName1}`);
+		image_two.mv(`${__dirname}/properties/${setName2}`);
 		image_three.mv(
-			`${__dirname}/properties/${property_for}_${image_three.name}`
+			`${__dirname}/properties/${setName3}`
 		);
 
 
@@ -139,12 +145,14 @@ client.connect((err) => {
 		const agent_skype = req.body.agent_skype;
 		const agent_image = req.files.agent_image;
 
+		const setName  = agent_image.name.replace(/\s/g, "");
+
 		const key = `${agent_number}_${floorNumber}`;
-		const agent_img = `${agent_skype}_${agent_image.name}`;
+		const agent_img = setName;
 
 		const create_date = new Date();
 
-		agent_image.mv(`${__dirname}/agents/${agent_skype}_${agent_image.name}`);
+		agent_image.mv(`${__dirname}/agents/${setName}`);
 
 		AgentDB.insertOne({
 			key,
