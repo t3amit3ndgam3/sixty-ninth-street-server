@@ -20,8 +20,7 @@ const client = new MongoClient(uri, {
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static("properties"));
-app.use(express.static("agents"));
+app.use(express.static("properties", "agents"));
 app.use(fileUpload());
 
 client.connect((err) => {
@@ -57,16 +56,16 @@ client.connect((err) => {
 		const image_two = req.files.image_two;
 		const image_three = req.files.image_three;
 
-		const key = `${property_name}_${floorNumber}`;
-		const imgOne = `${property_name}_${image_one.name}`;
-		const imgTwo = `${property_name}_${image_two.name}`;
-		const imgThree = `${property_name}_${image_three.name}`;
+		const key = `${property_for}_${floorNumber}`;
+		const imgOne = `${property_for}_${image_one.name}`;
+		const imgTwo = `${property_for}_${image_two.name}`;
+		const imgThree = `${property_for}_${image_three.name}`;
 		const create_date = new Date();
 
-		image_one.mv(`${__dirname}/properties/${city}_${image_one.name}`);
-		image_two.mv(`${__dirname}/properties/${city}_${image_two.name}`);
+		image_one.mv(`${__dirname}/properties/${property_for}_${image_one.name}`);
+		image_two.mv(`${__dirname}/properties/${property_for}_${image_two.name}`);
 		image_three.mv(
-			`${__dirname}/properties/${city}_${image_three.name}`
+			`${__dirname}/properties/${property_for}_${image_three.name}`
 		);
 
 
@@ -141,7 +140,7 @@ client.connect((err) => {
 		const agent_image = req.files.agent_image;
 
 		const key = `${agent_number}_${floorNumber}`;
-		const agent_img = `${agent_name}_${agent_image.name}`;
+		const agent_img = `${agent_skype}_${agent_image.name}`;
 
 		const create_date = new Date();
 
