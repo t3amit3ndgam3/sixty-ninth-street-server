@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static("properties", "agents"));
+app.use(express.static("properties"));
 app.use(fileUpload());
 
 client.connect((err) => {
