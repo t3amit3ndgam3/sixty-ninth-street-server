@@ -21,7 +21,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("properties"));
-app.use(express.static("agents"));
 app.use(fileUpload());
 
 client.connect((err) => {
@@ -152,7 +151,7 @@ client.connect((err) => {
 
 		const create_date = new Date();
 
-		agent_image.mv(`${__dirname}/agents/${setName}`);
+		agent_image.mv(`${__dirname}/properties/${setName}`);
 
 		AgentDB.insertOne({
 			key,
