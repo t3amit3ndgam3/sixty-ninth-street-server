@@ -40,6 +40,7 @@ client.connect((err) => {
 		const property_type = req.body.property_type;
 		const city = req.body.city;
 		const property_name = req.body.property_name;
+		const title = req.body.title;
 		const property_description = req.body.property_description;
 		const facing = req.body.facing;
 		const property_size = req.body.property_size;
@@ -80,6 +81,7 @@ client.connect((err) => {
 			property_type,
 			city,
 			property_name,
+			title,
 			property_description,
 			facing,
 			property_size,
@@ -142,6 +144,7 @@ client.connect((err) => {
 		const agent_twitter = req.body.agent_twitter;
 		const agent_instagram = req.body.agent_instagram;
 		const agent_skype = req.body.agent_skype;
+		const agent_description = req.body.agent_description;
 		const agent_image = req.files.agent_image;
 
 		const setName  = agent_image.name.replace(/\s/g, "");
@@ -164,8 +167,9 @@ client.connect((err) => {
 			agent_twitter,
 			agent_instagram,
 			agent_skype,
+			agent_description,
 			agent_img,
-			create_date
+			create_date,
 		})
 		.then( result =>{
 			res.send(result.insertedCount > 0);
@@ -190,7 +194,7 @@ client.connect((err) => {
 	})
 
 	app.get('/findProperties/:id',(req, res) => {
-		PropertyDB.find({id: req.params.id}).toArray((err, documents) => {
+		PropertyDB.find({key: req.params.id}).toArray((err, documents) => {
 			res.send(documents);
 		})
 	})
