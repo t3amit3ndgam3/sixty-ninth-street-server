@@ -145,6 +145,9 @@ client.connect((err) => {
 		const agent_instagram = req.body.agent_instagram;
 		const agent_skype = req.body.agent_skype;
 		const agent_description = req.body.agent_description;
+		const experience = req.body.experience;
+		const fees = req.body.fees;
+
 		const agent_image = req.files.agent_image;
 
 		const setName  = agent_image.name.replace(/\s/g, "");
@@ -168,6 +171,8 @@ client.connect((err) => {
 			agent_instagram,
 			agent_skype,
 			agent_description,
+			experience,
+			fees,
 			agent_img,
 			create_date,
 		})
