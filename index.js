@@ -205,7 +205,7 @@ client.connect((err) => {
 	})
 
 	app.get('/findAgent/:id',(req, res) => {
-		AgentDB.find({id: req.params.id}).toArray((err, documents) => {
+		AgentDB.find({key: req.params.id}).toArray((err, documents) => {
 			res.send(documents);
 		})
 	})
