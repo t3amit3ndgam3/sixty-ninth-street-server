@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const Property = require('../models/properties')
-
+const Property = require('../models/properties');
 
 exports.propertiesAdd = async (req, res) => {
     try {
