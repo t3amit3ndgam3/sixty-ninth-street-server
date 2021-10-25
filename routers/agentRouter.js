@@ -5,6 +5,6 @@ const {agentAdd,getAgent,singleAgent} = require('../controllers/agentController'
 
 router.post('/addAgent', agentAdd);
 router.get('/getAgent', getAgent);
-router.get('/singleAgent', singleAgent);
+router.get('/singleAgent/:id', singleAgent);
 
 module.exports = router;

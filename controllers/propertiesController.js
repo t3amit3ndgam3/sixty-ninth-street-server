@@ -5,7 +5,28 @@ exports.propertiesAdd = async (req, res) => {
     try {
         let number = Math.random() * 10000000000;
         let floorNumber = Math.floor(number);
-        const key = `key_${floorNumber}`;
+        const keys = `key_${floorNumber}`;
+        const {property_for,
+            property_type,
+            city,
+            property_name,
+            title,
+            property_description,
+            facing,
+            property_size,
+            price,
+            price_is,
+            bedroom,
+            garages,
+            balconies,
+            bathroom,
+            owner_name,
+            owner_number,
+            owner_gmail,
+            image_one,
+            image_two,
+            image_three} = req.body;
+
         const addProperties = new Property({
             property_for,
             property_type,
@@ -27,7 +48,7 @@ exports.propertiesAdd = async (req, res) => {
             image_one,
             image_two,
             image_three,
-            key:key
+            key:keys
         })
         await addProperties.save()
         res.status(200).json({
@@ -37,14 +58,14 @@ exports.propertiesAdd = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message: 'signup error find!!!',
+            message: 'something error find!!!',
         });
     }
 }
 
 exports.getAllProperties = async (req, res) => {
     try {
-        const allProperty = Property.find({})
+        const allProperty = await Property.find({})
         res.status(200).json({
             data: allProperty,
             message: 'all properties found successfully'
@@ -62,7 +83,7 @@ exports.searchProperties = async (req, res) => {
         const collect = req.params.name;
         const regex = new RegExp(collect, 'i');
 
-        const findProperties = Property.find({ name: regex })
+        const findProperties =await Property.find({ name: regex })
         res.status(200).json({
             data: findProperties,
             message: 'all properties found successfully'
