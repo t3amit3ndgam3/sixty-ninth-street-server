@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect(process.env.MONGO_CONNECTION_STRING,{
+mongoose.connect(`mongodb+srv://${process.env.DbUser}:${process.env.DbPass}@cluster0.dibao.mongodb.net/${process.env.DbName}?retryWrites=true&w=majority`,{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
@@ -35,21 +35,25 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{
 
 // import routes
 
-const propertiesRouter = require('./routers/propertiesRouter')
+const propertiesRouter = require('./routers/propertiesRouter');
+const agentRouter = require('./routers/agentRouter');
+const reviewRouter = require('./routers/userReviewRouter');
 
 
 //app middleware
 
 
 //middleware
-app.use('/api', propertiesRouter)
+app.use('/api', propertiesRouter);
+app.use('/69',agentRouter);
+app.use('/69',reviewRouter);
 
 
 //testing heroku deployment
 
-// app.get('/', (req, res) => {
-//     res.send('checking heroku deployment')
-// })
+app.get('/', (req, res) => {
+    res.send('checking heroku deployment')
+})
 
 
 //default error handler
@@ -67,7 +71,7 @@ app.use(errorHandler)
 
 
 
-const port = process.env.PORT
+const port = 5000;
 app.listen(port, ()=>{
     console.log(`listening on port ${port}`)
 })
