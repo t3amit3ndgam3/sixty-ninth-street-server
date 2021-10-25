@@ -35,7 +35,7 @@ const propertiesSchema = new mongoose.Schema({
         required: true
     },
     price_is:{
-        type: Number,
+        type: String,
         required: true
     },
     bedroom:{
@@ -79,7 +79,7 @@ const propertiesSchema = new mongoose.Schema({
         required: true
     },
     key:{
-        type: Number,
+        type: String,
     },
 },{timestamps:true})
 

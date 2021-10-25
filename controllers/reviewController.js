@@ -1,31 +1,32 @@
 const UserReviews = require('../models/userReviewModel');
 
-exports.addReview = async(req, res)=>{
-    try{    
+exports.addReview = async (req, res) => {
+    const {user_name, review} = req.body;
+    try {
         const reviewAdd = new UserReviews({
             user_name,
             review
         })
-        await addReview.save()
-        .res.status(200).json({
-            data:reviewAdd,
-            message: 'Review added successfully'
-        })
+        await reviewAdd.save()
+            res.status(200).json({
+                data: reviewAdd,
+                message: 'Review added successfully'
+            })
 
     }
-    catch(err){
-        res.status(500).json({message: err.message});
+    catch (err) {
+        res.status(500).json({ message: "Something went wrong..." });
     }
 }
-exports.getReviews = async(req, res)=>{
-    try{ 
-        const reviewsList  = UserReviews.find({})
+exports.getReviews = async (req, res) => {
+    try {
+        const reviewsList = await UserReviews.find({})
         res.status(200).json({
-            data:reviewsList,
+            data: reviewsList,
             message: 'Reviews done successfully'
         })
     }
-    catch(err){
-        res.status(500).json({message: "Reviews not found"});
+    catch (err) {
+        res.status(500).json({ message: "something went wrong..." });
     }
 }
