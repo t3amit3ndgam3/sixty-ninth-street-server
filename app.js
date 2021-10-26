@@ -38,6 +38,7 @@ mongoose.connect(`mongodb+srv://${process.env.DbUser}:${process.env.DbPass}@clus
 const propertiesRouter = require('./routers/propertiesRouter');
 const agentRouter = require('./routers/agentRouter');
 const reviewRouter = require('./routers/userReviewRouter');
+const userAuthRouter = require('./routers/userAuthRouter')
 
 
 //app middleware
@@ -45,8 +46,9 @@ const reviewRouter = require('./routers/userReviewRouter');
 
 //middleware
 app.use('/api', propertiesRouter);
-app.use('/69',agentRouter);
-app.use('/69',reviewRouter);
+app.use('/api',agentRouter);
+app.use('/api',reviewRouter);
+app.use('/api',userAuthRouter);
 
 
 //testing heroku deployment
