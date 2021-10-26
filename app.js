@@ -39,7 +39,7 @@ const propertiesRouter = require('./routers/propertiesRouter');
 const agentRouter = require('./routers/agentRouter');
 const reviewRouter = require('./routers/userReviewRouter');
 const userAuthRouter = require('./routers/userAuthRouter')
-
+const homeLoanRouter = require('./routers/homeLoanRouter')
 
 //app middleware
 
@@ -49,6 +49,7 @@ app.use('/api', propertiesRouter);
 app.use('/api',agentRouter);
 app.use('/api',reviewRouter);
 app.use('/api',userAuthRouter);
+app.use('/api',homeLoanRouter);
 
 
 //testing heroku deployment
