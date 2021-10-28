@@ -38,8 +38,9 @@ mongoose.connect('mongodb://localhost:27017/test',{
 const propertiesRouter = require('./routers/propertiesRouter');
 const agentRouter = require('./routers/agentRouter');
 const reviewRouter = require('./routers/userReviewRouter');
-const userAuthRouter = require('./routers/userAuthRouter')
-const homeLoanRouter = require('./routers/homeLoanRouter')
+const userAuthRouter = require('./routers/userAuthRouter');
+const homeLoanRouter = require('./routers/homeLoanRouter');
+const requirementRouter = require('./routers/requirementRouter');
 
 //app middleware
 
@@ -50,6 +51,7 @@ app.use('/api',agentRouter);
 app.use('/api',reviewRouter);
 app.use('/api',userAuthRouter);
 app.use('/api',homeLoanRouter);
+app.use('/api',requirementRouter);
 
 
 //testing heroku deployment

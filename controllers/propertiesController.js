@@ -23,6 +23,7 @@ exports.propertiesAdd = async (req, res) => {
             owner_name,
             owner_number,
             owner_gmail,
+            user_email,
             image_one,
             image_two,
             image_three} = req.body;
@@ -45,6 +46,7 @@ exports.propertiesAdd = async (req, res) => {
             owner_name,
             owner_number,
             owner_gmail,
+            user_email,
             image_one,
             image_two,
             image_three,
@@ -107,4 +109,71 @@ exports.specificProperties = async(req, res) => {
             err: "properties not found something went wrong..."
         })
     }
+}
+
+exports.findPropertiesByEmail = async(req, res) => {
+    try {
+        const propertyEmail = await Property.find({user_email: req.params.email})
+        res.status(200).json({
+            data: propertyEmail,
+            message: 'properties found successfully'
+        })
+    } catch (err) {
+        res.status(500).json({
+            err: "properties not found something went wrong..."
+        })
+    }
+}
+exports.deleteProperties = async(req, res) => {
+	try {
+		const propertiesDelete = await Property.deleteOne({ _id: req.params.id });
+		res.status(200).json({
+			data: propertiesDelete,
+			message: "Properties Deleted successfully",
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "Properties list not found",
+		});
+	}
+};
+
+exports.updateProperties = async (req, res) => {
+    const id = {_id : req.params.id};
+    const updateData = {
+        property_for: req.body.property_for,
+        property_type: req.body.property_type,
+        city: req.body.city,
+        property_name:req.body.property_name,
+        title: req.body.title,
+        property_description: req.body.property_description,
+        facing: req.body.facing,
+        property_size : req.body.property_size,
+        price : req.body.price,
+        price_is: req.body.price_is,
+        bedroom: req.body.bedroom,
+        garages: req.body.garages,
+        balconies: req.body.balconies,
+        bathroom: req.body.bathroom,
+        owner_name: req.body.owner_name,
+        owner_number: req.body.owner_number,
+        owner_gmail: req.body.owner_gmail,
+        image_one: req.body.image_one,
+        image_two: req.body.image_two,
+        image_three: req.body.image_three
+    }
+    try {
+		const propertyUpdate = await Property.findOneAndUpdate(id, updateData, {
+			new: true,
+		});
+		res.status(200).json({
+			data: propertyUpdate,
+			message: "property update successfully",
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "property not updated",
+		});
+	}
+
 }

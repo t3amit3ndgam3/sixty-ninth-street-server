@@ -90,62 +90,30 @@ exports.deleteAgent = async (req, res) => {
 	}
 };
 
-// exports.updateAgent = async (req, res) => {
-// 	const id = req.params.id;
-// 	const updates = req.body;
-// 	try{
-// 		const agentUpdate = await Agents.findByIdAndUpdate(id,updates);
-// 		res.status(200).json({
-// 			data: agentUpdate,
-// 			message: "Agent update successfully",
-// 		});
-
-// 	}catch (err) {
-// 		res.status(500).json({
-// 			message: err.message,
-// 		});
-// 	}
-// }
 exports.updateAgent = async (req, res) => {
+	const id = { _id: req.params.id };
+	const update = {
+		agent_name: req.body.agent_name,
+		agent_title: req.body.agent_title,
+		agent_number: req.body.agent_number,
+		agent_email: req.body.agent_email,
+		agent_facebook: req.body.agent_facebook,
+		agent_linkend: req.body.agent_linkend,
+		agent_twitter: req.body.agent_twitter,
+		agent_instagram: req.body.agent_instagram,
+		agent_skype: req.body.agent_skype,
+		agent_description: req.body.agent_description,
+		experience: req.body.experience,
+		fees: req.body.fees,
+		agent_image: req.body.agent_image,
+	};
 	try {
-		const {
-			agent_name,
-			agent_title,
-			agent_number,
-			agent_email,
-			agent_facebook,
-			agent_linkend,
-			agent_twitter,
-			agent_instagram,
-			agent_skype,
-			agent_description,
-			experience,
-			fees,
-			agent_image,
-		} = req.body;
-
-		const previousData = await Agents.findByIdAndUpdate(
-			{ _id: req.params.id },
-			{
-				agent_name: agent_name,
-				agent_title: agent_title,
-				agent_number: agent_number,
-				agent_email: agent_email,
-				agent_facebook: agent_facebook,
-				agent_linkend: agent_linkend,
-				agent_twitter: agent_twitter,
-				agent_instagram: agent_instagram,
-				agent_skype: agent_skype,
-				agent_description: agent_description,
-				experience: experience,
-				fees: fees,
-				agent_image: agent_image,
-			},
-			{ new: true, useFindAndModify: false }
-		);
+		const agentUpdate = await Agents.findOneAndUpdate(id, update, {
+			new: true,
+		});
 		res.status(200).json({
-			data: previousData,
-			message: "Agent updated successfully",
+			data: agentUpdate,
+			message: "Agent update successfully",
 		});
 	} catch (err) {
 		res.status(500).json({

@@ -13,6 +13,6 @@ router.post("/addAgent", agentAdd);
 router.get("/getAgent", getAgent);
 router.get("/singleAgent/:id", singleAgent);
 router.delete("/deleteAgent/:id", deleteAgent);
-router.put("/updateAgent/:id", updateAgent);
+router.patch("/updateAgent/:id", updateAgent);
 
 module.exports = router;
