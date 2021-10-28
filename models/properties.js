@@ -66,6 +66,10 @@ const propertiesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    user_email:{
+        type: String,
+        required: true
+    },
     image_one:{
         type: String,
         required: true

@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect(process.env.MONGO_CONNECTION_STRING,{
+mongoose.connect('mongodb://localhost:27017/test',{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
@@ -38,8 +38,9 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{
 const propertiesRouter = require('./routers/propertiesRouter');
 const agentRouter = require('./routers/agentRouter');
 const reviewRouter = require('./routers/userReviewRouter');
-const userAuthRouter = require('./routers/userAuthRouter')
-const homeLoanRouter = require('./routers/homeLoanRouter')
+const userAuthRouter = require('./routers/userAuthRouter');
+const homeLoanRouter = require('./routers/homeLoanRouter');
+const requirementRouter = require('./routers/requirementRouter');
 
 //app middleware
 
@@ -50,6 +51,7 @@ app.use('/api',agentRouter);
 app.use('/api',reviewRouter);
 app.use('/api',userAuthRouter);
 app.use('/api',homeLoanRouter);
+app.use('/api',requirementRouter);
 
 
 //testing heroku deployment
