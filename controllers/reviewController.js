@@ -1,11 +1,11 @@
 const UserReviews = require('../models/userReviewModel');
 
 exports.addReview = async (req, res) => {
-    const {user_name, review} = req.body;
+    const {user_name, user_reviews} = req.body;
     try {
         const reviewAdd = new UserReviews({
             user_name,
-            review
+            user_reviews
         })
         await reviewAdd.save()
             res.status(200).json({
@@ -15,7 +15,7 @@ exports.addReview = async (req, res) => {
 
     }
     catch (err) {
-        res.status(500).json({ message: "Something went wrong..." });
+        res.status(500).json({ message: err.message });
     }
 }
 exports.getReviews = async (req, res) => {

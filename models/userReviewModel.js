@@ -5,7 +5,7 @@ const UserReviewSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    review:{
+    user_reviews:{
         type:String,
         required:true
     }

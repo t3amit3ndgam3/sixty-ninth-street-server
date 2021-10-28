@@ -58,7 +58,7 @@ exports.propertiesAdd = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message: 'something error find!!!',
+            message: err.message,
         });
     }
 }

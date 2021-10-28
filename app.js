@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect(process.env.MONGO_CONNECTION_STRING,{
+mongoose.connect('mongodb://localhost:27017/test',{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
