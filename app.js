@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect(`mongodb+srv://${process.env.DbUser}:${process.env.DbPass}@cluster0.dibao.mongodb.net/${process.env.DbName}?retryWrites=true&w=majority`,{
+mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
