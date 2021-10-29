@@ -22,9 +22,6 @@ app.use(bodyParser.json())
 
 
 // Database connection
-const DbUser = TeamIt
-const DbPass = TeamItPass0102
-const DbName = SixtyNinethStreet
 
 mongoose.connect(
     `mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,
