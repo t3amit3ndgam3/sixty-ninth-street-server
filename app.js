@@ -24,7 +24,7 @@ app.use(bodyParser.json())
 // Database connection
 
 mongoose.connect(
-    `mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,
+    `mongodb+srv://SixtyNinethStreet:SixtyNinethStreet@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useFindAndModify: false,
