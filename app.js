@@ -27,7 +27,7 @@ const DbPass = TeamItPass0102
 const DbName = SixtyNinethStreet
 
 mongoose.connect(
-    `mongodb+srv://${DbUser}:${DbPass}@${cluster}.mongodb.net/${DbName}?retryWrites=true&w=majority`, 
+    `mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useFindAndModify: false,
