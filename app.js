@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect('mongodb://localhost:27017/test',{
+mongoose.connect(`mongodb+srv://${process.env.DbUser}:${process.env.DbPass}@cluster0.dibao.mongodb.net/${process.env.DbName}?retryWrites=true&w=majority`,{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
@@ -41,6 +41,7 @@ const reviewRouter = require('./routers/userReviewRouter');
 const userAuthRouter = require('./routers/userAuthRouter');
 const homeLoanRouter = require('./routers/homeLoanRouter');
 const requirementRouter = require('./routers/requirementRouter');
+const hireAgentRouter = require('./routers/hireAgentRouter');
 
 //app middleware
 
@@ -52,6 +53,7 @@ app.use('/api',reviewRouter);
 app.use('/api',userAuthRouter);
 app.use('/api',homeLoanRouter);
 app.use('/api',requirementRouter);
+app.use('/api',hireAgentRouter);
 
 
 //testing heroku deployment
