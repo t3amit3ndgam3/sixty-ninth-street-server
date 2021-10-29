@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect("mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority",{
+mongoose.connect(`mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,{
     useNewUrlParser : true,
     useUnifiedTopology : false,
 })
