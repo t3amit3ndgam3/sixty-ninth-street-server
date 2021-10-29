@@ -22,15 +22,14 @@ app.use(bodyParser.json())
 
 
 // Database connection
+mongoose.connect(`mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,{
+    useNewUrlParser : true,
+    useFindAndModify: false,
+    useUnifiedTopology : false,
+})
+.then(()=> console.log('Database connection established'))
+.catch(err => console.log(err))
 
-mongoose.connect(
-    `mongodb+srv://TeamIt:TeamItPass0102@cluster0.dibao.mongodb.net/SixtyNinethStreet?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true
-    }
-  );
 
 
 
