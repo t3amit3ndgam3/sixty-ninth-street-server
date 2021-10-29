@@ -22,14 +22,18 @@ app.use(bodyParser.json())
 
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI,{
-    useNewUrlParser : true,
-    useUnifiedTopology : false,
-})
-.then(()=> console.log('Database connection established'))
-.catch(err => console.log(err))
+const DbUser = TeamIt
+const DbPass = TeamItPass0102
+const DbName = SixtyNinethStreet
 
-
+mongoose.connect(
+    `mongodb+srv://${DbUser}:${DbPass}@${cluster}.mongodb.net/${DbName}?retryWrites=true&w=majority`, 
+    {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true
+    }
+  );
 
 
 
