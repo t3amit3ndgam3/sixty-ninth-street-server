@@ -99,7 +99,7 @@ exports.searchProperties = async (req, res) => {
 
 exports.specificProperties = async(req, res) => {
     try {
-        const specificProperty = Property.find({_id: req.params.id})
+        const specificProperty = await Property.find({_id: req.params.id})
         res.status(200).json({
             data: specificProperty,
             message: 'properties found successfully'
