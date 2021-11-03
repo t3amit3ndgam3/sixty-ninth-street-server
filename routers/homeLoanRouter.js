@@ -21,7 +21,7 @@ router.get('/getApprovedLoan',getApprovedLoan);
 router.get('/getSpecificLoan/:id',getSpecificLoan);
 
 //get specific user all requests
-router.get('/getSpecificUserAllLoan',getSpecificUserAllLoan);
+router.get('/getSpecificUserAllLoan/:email',getSpecificUserAllLoan);
 
 //delete specific user loan
 router.delete('/delete/:id', deleteSpecificLoan);
