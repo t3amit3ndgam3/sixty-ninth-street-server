@@ -82,7 +82,7 @@ exports.updateStatus = async (req, res) => {
           loan_status: "approved",
         },
       },
-      { new: true, useFindAndModify: false }
+      { new: true, useFindAndModify: true }
     );
     res.status(200).json({
       message: "Status updated successfully",
