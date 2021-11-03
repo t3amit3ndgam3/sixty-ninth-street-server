@@ -132,7 +132,7 @@ exports.findMultipleProperties = async (req, res) => {
 	console.log(property_for, property_type, city);
 	try {
 		const propertyMultiFind = await Property.find({
-			$or: [
+			$and: [
 				{ property_type: property_type },
 				{ property_for: property_for },
 				{ city: city },
