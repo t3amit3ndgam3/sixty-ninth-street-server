@@ -130,7 +130,7 @@ exports.getSpecificLoan = async (req, res) => {
 
 exports.getSpecificUserAllLoan = async (req, res) => {
   try {
-    const data = await HomeLoan.find({ email: req.params.email });
+    const data = await HomeLoan.find({ user_email: req.params.email });
     res.status(200).json({
       result: data,
       message: "Specific user all loan find successfully",
